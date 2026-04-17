@@ -2,9 +2,28 @@
 
 set -e
 
+echo "=============================="
+echo "[ENTRYPOINT] START"
+echo "=============================="
+
+echo "[DEBUG] Current user: $(whoami)"
+echo "[DEBUG] Current dir: $(pwd)"
+echo "[DEBUG] MIGRATE=$MIGRATE"
+echo "[DEBUG] PATH:"
+echo "$PATH"
+
 if [ "${MIGRATE:-false}" = "true" ]; then
     echo "Applying database migrations..."
-    uv run alembic upgrade head
+
+    echo "[DEBUG] Alembic check:"
+    uv run alembic --version || true
+
+    echo "[DEBUG] Alembic config check:"
+    ls -la alembic.ini || true
+    ls -la /code/alembic.ini || true
+    echo "[DEBUG] Running alembic upgrade..."
+
+    alembic -c alembic.ini upgrade head
     echo "Migrations applied."
 fi
 

@@ -16,13 +16,9 @@ COPY pyproject.toml uv.lock ./
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-install-project
 
+COPY alembic.ini ./
 COPY src ./src
 COPY bin ./bin
 
 ENV PYTHONPATH=/code
 ENV PATH="/code/.venv/bin:$PATH"
-
-
-RUN chmod +x bin/entrypoint.sh
-
-ENTRYPOINT ["bin/entrypoint.sh"]
