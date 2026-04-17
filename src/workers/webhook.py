@@ -6,7 +6,7 @@ import httpx
 
 from src.main.app_config import AppSettings, get_settings
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("app")
 
 
 class WebhookDeliveryError(RuntimeError):

@@ -61,7 +61,8 @@ services:
       dockerfile: Dockerfile
     command: [ "uv", "run", "python", "-m", "src.workers.consumer" ]
     restart: unless-stopped
-    env_file: .env
+    env_file:
+      - .env.prod
     depends_on:
       postgres:
         condition: service_healthy
@@ -80,7 +81,8 @@ services:
       dockerfile: Dockerfile
     command: [ "uv", "run", "python", "-m", "src.workers.producer" ]
     restart: unless-stopped
-    env_file: .env
+    env_file:
+      - .env.prod
     depends_on:
       postgres:
         condition: service_healthy

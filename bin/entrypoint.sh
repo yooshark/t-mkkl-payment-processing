@@ -16,9 +16,11 @@ GUNICORN_WORKERS=${GUNICORN_WORKERS:-4}
 
 echo "Starting FastAPI app ..."
 exec gunicorn src.main.web:create_app \
-    -k app.core.gunicorn_conf.CustomUvicornWorker \
+    -k src.main.gunicorn_conf.CustomUvicornWorker \
     -w $GUNICORN_WORKERS \
     -b $GUNICORN_HOST:$GUNICORN_PORT \
     --timeout $GUNICORN_TIMEOUT \
     --access-logfile - \
     --error-logfile -
+
+exec "$@"

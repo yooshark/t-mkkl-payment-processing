@@ -32,7 +32,7 @@ omit = [
 ]
 
 [tool.ruff]
-src = ["app"]
+src = ["src"]
 line-length = 120
 output-format = "concise"
 
